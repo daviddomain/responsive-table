@@ -1,0 +1,56 @@
+{
+	"name": "responsive-table",
+	"version": "1.0.0",
+	"description": "A beautiful animated web component that creates a rising sun effect with smooth transitions and customizable colors.",
+	"author": "David Kurek",
+	"license": "MIT",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/daviddomain/responsive-table.git"
+	},
+	"bugs": {
+		"url": "https://github.com/daviddomain/responsive-table/issues"
+	},
+	"homepage": "https://daviddomain.github.io/responsive-table/",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build:lib": "vite build -m lib",
+		"build:site": "vite build -m site",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepublishOnly": "npm run build:lib"
+	},
+	"keywords": [
+		"webcomponent",
+		"custom-element",
+		"vanilla-js",
+		"vite",
+		"library"
+	],
+	"engines": {
+		"node": ">=18"
+	},
+	"main": "./dist/responsive-table.js",
+	"module": "./dist/responsive-table.js",
+	"exports": {
+		".": {
+			"import": "./dist/responsive-table.js"
+		},
+		"./*": "./dist/*"
+	},
+	"sideEffects": true,
+	"files": [
+		"dist",
+		"docs",
+		"README.md",
+		"LICENSE"
+	],
+	"devDependencies": {
+		"@rollup/plugin-terser": "^0.4.4",
+		"vite": "^6.3.5"
+	}
+}
