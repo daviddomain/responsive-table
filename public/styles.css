@@ -44,6 +44,9 @@ p {
 table {
 	table-layout: auto;
 	width: 100%;
+  caption {
+    margin-bottom: 2rem;
+  }
 }
 
 tr {
@@ -60,7 +63,7 @@ th {
 	overflow: auto;
 }
 
-td:first-child {
+#props-description td:first-child {
 	text-align: right;
 	padding-right: 1rem;
 }
