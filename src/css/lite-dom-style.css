@@ -1,21 +1,21 @@
-thead,
-tbody,
-tr,
-th,
-td {
+table[data-responsive-table] thead,
+table[data-responsive-table] tbody,
+table[data-responsive-table] tr,
+table[data-responsive-table] th,
+table[data-responsive-table] td {
 	display: block;
 }
 
 /* Hide table headers (but not display: none;, for accessibility) */
-thead tr {
+table[data-responsive-table] thead tr {
 	display: none;
 }
 
-tr {
+table[data-responsive-table] tr {
 	/* border: 1px solid #ccc; */
 }
 
-td {
+table[data-responsive-table] td {
 	/* Behave  like a "row" */
 	border: none;
 	/* border-bottom: 1px solid #eee; */
@@ -24,11 +24,11 @@ td {
 	display: flex;
 }
 
-td:before {
+table[data-responsive-table] td:before {
 	/* Now like a table header */
 	/* position: absolute; */
 	width: 50%;
-  border-right: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 	/* Top/left values mimic padding */
 	/* top: 6px;
 	left: 6px;

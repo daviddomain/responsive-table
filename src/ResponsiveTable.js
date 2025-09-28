@@ -23,6 +23,9 @@ export class ResponsiveTable extends HTMLElement {
 				.assignedElements({ flatten: true })
 				.filter((node) => node.tagName === 'TABLE')
 				.forEach((table) => {
+					if (!table.hasAttribute('data-responsive-table')) {
+						table.setAttribute('data-responsive-table', 'true');
+					}
 					if (table.querySelector('style[data-responsive-table]')) {
 						return;
 					}
