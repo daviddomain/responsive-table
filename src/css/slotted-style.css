@@ -1,0 +1,10 @@
+::slotted(table) {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+@media only screen and (max-width: 760px) {
+	::slotted(table) {
+		display: block;
+	}
+}
