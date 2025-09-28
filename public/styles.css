@@ -1,9 +1,16 @@
 html {
 	height: 100vh;
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
 }
 
 body {
-	display: grid;
+	display: block;
 	font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	place-items: center;
@@ -12,6 +19,7 @@ body {
 	line-height: 1.5;
 	height: 100vh;
 	margin: 0;
+    min-width: 0;
 }
 
 main {
@@ -44,9 +52,9 @@ p {
 table {
 	table-layout: auto;
 	width: 100%;
-  caption {
-    margin-bottom: 2rem;
-  }
+	caption {
+		margin-bottom: 2rem;
+	}
 }
 
 tr {
@@ -66,6 +74,21 @@ th {
 #props-description td:first-child {
 	text-align: right;
 	padding-right: 1rem;
+}
+
+/* Codeblöcke bändigen */
+pre.codeblock {
+  max-width: 100%;
+  overflow: auto;          /* eigener (horizontaler) Scroll, nicht die Seite */
+  white-space: pre-wrap;   /* bricht lange Zeilen um */
+  word-break: break-word;  /* falls Wörter „untrennbar“ sind */
+  overflow-wrap: anywhere; /* fallback für sehr lange Tokens */
+  margin: 0 0 1rem;        /* optional: Standard-Margins zähmen */
+}
+
+pre.codeblock > code {
+  display: block;          /* verhindert, dass <code> breiter wird als <pre> */
+  max-width: 100%;
 }
 
 .codeblock {

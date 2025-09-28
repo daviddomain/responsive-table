@@ -33,17 +33,21 @@ export class ResponsiveTable extends HTMLElement {
 						table?.tHead?.firstElementChild?.children
 					);
 
-          const addColumnHeaders = () => {
-						const labelsFromColumnHeaders = columnHeaders
-							.map((th) => th.textContent)
-							.reduce((acc, next, index) => {
-								return (
-									acc +
-									`td:nth-of-type(${index + 1}):before { content: "${next.trim()}"; }`
-								);
-							}, '');
-              return liteDomStyles + labelsFromColumnHeaders
-          }
+					const addColumnHeaders = () => {
+						const columnHeaderRules = columnHeaders
+							.map((th, index) => {
+								const content = JSON.stringify(th.textContent?.trim() ?? '');
+								return `table[data-responsive-table] td:nth-of-type(${index + 1})::before { content: ${content}; }`;
+							})
+							.filter(Boolean)
+							.join('\n\t');
+
+						if (!columnHeaderRules) {
+							return liteDomStyles;
+						}
+
+						return `${liteDomStyles}\n\t${columnHeaderRules}\n}`;
+					};
 
 					const style = document.createElement('style');
 					style.dataset.responsiveTable = 'display-block';
