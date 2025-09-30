@@ -6,16 +6,38 @@ table[data-responsive-table] th,
 table[data-responsive-table] td {
 	display: block;
 }
-
 table[data-responsive-table] thead tr {
 	visibility: collapse;
 }
-
 table[data-responsive-table] td {
 	display: flex;
-
 }
-
 table[data-responsive-table] td:before {
 	width: 50%;
+}
+
+@container (width > 768px) {
+	table[data-responsive-table] caption {
+    display: table-caption;
+  }
+	table[data-responsive-table] thead {
+		display: table-header-group;
+	}
+	table[data-responsive-table] tbody {
+		display: table-row-group;
+	}
+	table[data-responsive-table] tr:not(table[data-responsive-table] thead tr) {
+		display: table-row;
+	}
+	table[data-responsive-table] th,
+	table[data-responsive-table] td {
+		display: table-cell;
+	}
+	table[data-responsive-table] thead tr {
+		visibility: visible;
+	}
+	table[data-responsive-table] td:before {
+		display: none;
+    width: 0;
+	}
 }

@@ -23,7 +23,7 @@ body {
 }
 
 main {
-	max-width: 760px;
+	max-width: 960px;
 	margin: 3rem auto;
 	text-align: center;
 	padding: 24px;
@@ -76,18 +76,17 @@ th {
 	padding-right: 1rem;
 }
 
-/* Codeblöcke bändigen */
 pre.codeblock {
   max-width: 100%;
-  overflow: auto;          /* eigener (horizontaler) Scroll, nicht die Seite */
-  white-space: pre-wrap;   /* bricht lange Zeilen um */
-  word-break: break-word;  /* falls Wörter „untrennbar“ sind */
-  overflow-wrap: anywhere; /* fallback für sehr lange Tokens */
-  margin: 0 0 1rem;        /* optional: Standard-Margins zähmen */
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  margin: 0 0 1rem;
 }
 
 pre.codeblock > code {
-  display: block;          /* verhindert, dass <code> breiter wird als <pre> */
+  display: block;
   max-width: 100%;
 }
 

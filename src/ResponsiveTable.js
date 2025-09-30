@@ -12,10 +12,27 @@ export class ResponsiveTable extends HTMLElement {
 			<style>
 				${slottedStyles}
 			</style>
-			<div id="container">
+			<div id="responsive-table-container">
 				<slot></slot>
 			</div>
 		`;
+
+		const addColumnHeaders = (columnHeaders) => {
+			const columnHeaderRules = columnHeaders
+				.map((th, index) => {
+					const content = JSON.stringify(th.textContent?.trim() ?? '');
+					return `table[data-responsive-table] td:nth-of-type(${
+						index + 1
+					})::before { content: ${content}; }`;
+				})
+				.filter(Boolean)
+				.join('\n\t');
+
+			if (!columnHeaderRules) {
+				return liteDomStyles;
+			}
+			return `${liteDomStyles}\n\t${columnHeaderRules}\n}`;
+		};
 
 		const slot = this.shadowRoot.querySelector('slot');
 		const applySlottedStyles = () => {
@@ -33,26 +50,12 @@ export class ResponsiveTable extends HTMLElement {
 						table?.tHead?.firstElementChild?.children
 					);
 
-					const addColumnHeaders = () => {
-						const columnHeaderRules = columnHeaders
-							.map((th, index) => {
-								const content = JSON.stringify(th.textContent?.trim() ?? '');
-								return `table[data-responsive-table] td:nth-of-type(${index + 1})::before { content: ${content}; }`;
-							})
-							.filter(Boolean)
-							.join('\n\t');
-
-						if (!columnHeaderRules) {
-							return liteDomStyles;
-						}
-
-						return `${liteDomStyles}\n\t${columnHeaderRules}\n}`;
-					};
-
 					const style = document.createElement('style');
 					style.dataset.responsiveTable = 'display-block';
-					style.textContent = columnHeaders.length ? addColumnHeaders() : `${liteDomStyles}`;
-          console.log(style.textContent)
+					style.textContent = columnHeaders.length
+						? addColumnHeaders(columnHeaders)
+						: `${liteDomStyles}`;
+					console.log(style.textContent);
 					table.insertBefore(style, table.firstChild);
 				});
 		};
