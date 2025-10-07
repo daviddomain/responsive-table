@@ -1,20 +1,9 @@
-:host {
-	container-type: inline-size;
-}
-
-#responsive-table-container {
-  container-type: inline-size;
-}
-
-::slotted(table[data-responsive-table]) {
+::slotted(table[data-responsive-table].responsive) {
 	display: block;
 	width: 100%;
 	border-collapse: collapse;
 }
 
-/* @media only screen and (max-width: 760px) { */
-@container (width > 768px) {
-	::slotted(table[data-responsive-table]) {
-		display: table;
-	}
+::slotted(table[data-responsive-table]) {
+	display: table;
 }

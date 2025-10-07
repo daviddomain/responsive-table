@@ -1,10 +1,19 @@
-import slottedStyles from './css/slotted-style.css?inline';
-import liteDomStyles from './css/lite-dom-style.css?inline';
+import slottedStyles from '@/css/slotted-style.css?inline';
+import liteDomStyles from '@/css/lite-dom-style.css?inline';
+import {
+	addColumnHeaders,
+	toggleResponsiveCSSClass,
+	applyResponsiveStyles
+} from '@/utils';
 
 export class ResponsiveTable extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+	}
+
+	get breakpoint() {
+		return this.getAttribute('breakpoint') || 768;
 	}
 
 	connectedCallback() {
@@ -17,51 +26,30 @@ export class ResponsiveTable extends HTMLElement {
 			</div>
 		`;
 
-		const addColumnHeaders = (columnHeaders) => {
-			const columnHeaderRules = columnHeaders
-				.map((th, index) => {
-					const content = JSON.stringify(th.textContent?.trim() ?? '');
-					return `table[data-responsive-table] td:nth-of-type(${
-						index + 1
-					})::before { content: ${content}; }`;
-				})
-				.filter(Boolean)
-				.join('\n\t');
-
-			if (!columnHeaderRules) {
-				return liteDomStyles;
-			}
-			return `${liteDomStyles}\n\t${columnHeaderRules}\n}`;
-		};
-
+		const container = this.shadowRoot.querySelector(
+			'#responsive-table-container'
+		);
 		const slot = this.shadowRoot.querySelector('slot');
-		const applySlottedStyles = () => {
-			slot
-				.assignedElements({ flatten: true })
-				.filter((node) => node.tagName === 'TABLE')
-				.forEach((table) => {
-					if (!table.hasAttribute('data-responsive-table')) {
-						table.setAttribute('data-responsive-table', 'true');
-					}
-					if (table.querySelector('style[data-responsive-table]')) {
-						return;
-					}
-					const columnHeaders = Array.from(
-						table?.tHead?.firstElementChild?.children
-					);
 
-					const style = document.createElement('style');
-					style.dataset.responsiveTable = 'display-block';
-					style.textContent = columnHeaders.length
-						? addColumnHeaders(columnHeaders)
-						: `${liteDomStyles}`;
-					console.log(style.textContent);
-					table.insertBefore(style, table.firstChild);
-				});
-		};
+		slot.addEventListener(
+			'slotchange',
+			applyResponsiveStyles.bind(this, addColumnHeaders, liteDomStyles, slot)
+		);
 
-		applySlottedStyles();
-		slot.addEventListener('slotchange', applySlottedStyles);
+		const resizeObserver = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				const {
+					contentRect: { width }
+				} = entry;
+				if (width < this.breakpoint) {
+					toggleResponsiveCSSClass('add', slot);
+				} else {
+					toggleResponsiveCSSClass('remove', slot);
+				}
+			}
+		});
+
+		resizeObserver.observe(container);
 	}
 }
 
