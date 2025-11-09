@@ -16,6 +16,10 @@ export class ResponsiveTable extends HTMLElement {
 		return this.getAttribute('breakpoint') || 768;
 	}
 
+  get type() {
+    return this.getAttribute('type') || 'default';
+  }
+
 	connectedCallback() {
 		this.shadowRoot.innerHTML = /* HTML */ `
 			<style>
@@ -50,6 +54,7 @@ export class ResponsiveTable extends HTMLElement {
 		});
 
 		resizeObserver.observe(container);
+
 	}
 }
 

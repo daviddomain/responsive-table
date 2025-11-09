@@ -1,7 +1,7 @@
 const addColumnHeaders = (columnHeaders, liteDomStyles) => {
 	const columnHeaderRules = columnHeaders
 		.map((th, index) => {
-			const content = JSON.stringify(th.textContent?.trim() ?? '');
+			const content = JSON.stringify(th.textContent?.trim()+':' ?? '');
 			return `table[data-responsive-table].responsive td:nth-of-type(${
 				index + 1
 			})::before { display: block; content: ${content}; }`;

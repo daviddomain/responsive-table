@@ -1,3 +1,7 @@
+:root {
+  --backgroundColor: #222222;
+}
+
 html {
 	height: 100vh;
 	box-sizing: border-box;
@@ -14,7 +18,7 @@ body {
 	font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	place-items: center;
-	background-color: #222d34;
+	background-color: var(--backgroundColor);
 	color: #e7ecef;
 	line-height: 1.5;
 	height: 100vh;
@@ -25,6 +29,14 @@ body {
 /* add to your global style sheet to avoid FOUC */
 table[data-responsive-table] {
   visibility: hidden;
+}
+
+table[data-responsive-table].responsive tr {
+  margin-bottom: 1.6rem;
+}
+
+table[data-responsive-table].responsive td {
+  border-bottom: 2px solid var(--backgroundColor);
 }
 
 main {
@@ -69,7 +81,7 @@ tr {
 
 td,
 th {
-	margin: 0 auto 8px;
+	margin: 0 auto;
 	text-align: left;
 	padding: 12px;
 	border-radius: 6px;
