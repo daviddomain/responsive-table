@@ -42,3 +42,9 @@ table[data-responsive-table].responsive td:before {
   font-weight: bold;
   width: auto;
 }
+
+table[data-responsive-table].responsive tbody tr {
+  box-sizing: border-box;
+  height: calc( var(--table-row-height) / var(--table-column-count));
+  overflow-y: hidden;
+}

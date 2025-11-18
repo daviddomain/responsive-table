@@ -16,8 +16,8 @@ export class ResponsiveTable extends HTMLElement {
 		return this.getAttribute('breakpoint') || 768;
 	}
 
-  get type() {
-    return this.getAttribute('type') || 'default';
+  get collapsable() {
+    return this.hasAttribute('collapsable');
   }
 
 	connectedCallback() {
@@ -54,6 +54,8 @@ export class ResponsiveTable extends HTMLElement {
 		});
 
 		resizeObserver.observe(container);
+
+    console.log(this.collapsable)
 
 	}
 }
