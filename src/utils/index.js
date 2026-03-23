@@ -7,9 +7,8 @@ const addColumnHeaders = (columnHeaders, liteDomStyles) => {
 	const columnHeaderRules = columnHeaders
 		.map((th, index) => {
 			const content = JSON.stringify(th.textContent?.trim() + ':' ?? '');
-			return `table[data-responsive-table].responsive td:nth-of-type(${
-				index + 1
-			})::before { display: block; content: ${content}; }`;
+			return `table[data-responsive-table].responsive td:nth-of-type(${index + 1
+				})::before { display: block; content: ${content}; }`;
 		})
 		.filter(Boolean)
 		.join('\n');
@@ -30,11 +29,30 @@ const toggleResponsiveCSSClass = (method, slot) => {
 };
 
 function applyCollapsibility(table) {
-	const row = table.tBodies?.[0]?.rows?.[0] ?? table.rows?.[0];
-	if (!row) return;
-	const { height } = row.getBoundingClientRect();
-	this.style.setProperty('--table-column-count', row.cells.length);
-	this.style.setProperty('--table-row-height', `${height}px`);
+	const rows = table.tBodies?.[0]?.rows ?? table.rows;
+	if (!rows) return;
+
+	table.dataset.collapsable = 'true';
+
+	Array.from(rows).forEach((row) => {
+		const firstCell = row.cells[0];
+		if (!firstCell) return;
+		const firstCellHeight = firstCell.getBoundingClientRect().height;
+
+		row.style.setProperty('--table-column-count', row.cells.length);
+		row.style.setProperty(
+			'--table-row-collapsed-height',
+			`${firstCellHeight}px`
+		);
+
+		// Add click listener if not already added
+		if (!row.dataset.collapsableInit) {
+			row.dataset.collapsableInit = 'true';
+			row.addEventListener('click', () => {
+				row.classList.toggle('is-expanded');
+			});
+		}
+	});
 }
 
 function applyResponsiveStyles(addColumnHeaders, liteDomStyles, slot) {
@@ -69,4 +87,9 @@ function applyResponsiveStyles(addColumnHeaders, liteDomStyles, slot) {
 		});
 }
 
-export { addColumnHeaders, toggleResponsiveCSSClass, applyResponsiveStyles };
+export {
+	addColumnHeaders,
+	toggleResponsiveCSSClass,
+	applyResponsiveStyles,
+	applyCollapsibility
+};

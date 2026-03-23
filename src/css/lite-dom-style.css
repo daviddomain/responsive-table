@@ -1,25 +1,31 @@
 table[data-responsive-table] caption {
-	display: table-caption;
+  display: table-caption;
 }
+
 table[data-responsive-table] thead {
-	display: table-header-group;
+  display: table-header-group;
 }
+
 table[data-responsive-table] tbody {
-	display: table-row-group;
+  display: table-row-group;
 }
+
 table[data-responsive-table] tr:not(table[data-responsive-table] thead tr) {
-	display: table-row;
+  display: table-row;
 }
+
 table[data-responsive-table] th,
 table[data-responsive-table] td {
-	display: table-cell;
+  display: table-cell;
 }
+
 table[data-responsive-table] thead tr {
-	visibility: visible;
+  visibility: visible;
 }
+
 table[data-responsive-table] td:before {
-	display: none;
-	width: 0;
+  display: none;
+  width: 0;
 }
 
 table[data-responsive-table].responsive caption,
@@ -28,16 +34,19 @@ table[data-responsive-table].responsive tbody,
 table[data-responsive-table].responsive tr:not(table[data-responsive-table].responsive thead tr),
 table[data-responsive-table].responsive th,
 table[data-responsive-table].responsive td {
-	display: block;
+  display: block;
 }
+
 table[data-responsive-table].responsive thead tr {
-	visibility: collapse;
+  visibility: collapse;
 }
+
 table[data-responsive-table].responsive td {
-	display: grid;
+  display: grid;
   grid-template-columns: auto 1fr;
   text-align: right;
 }
+
 table[data-responsive-table].responsive td:before {
   font-weight: bold;
   width: auto;
@@ -45,6 +54,37 @@ table[data-responsive-table].responsive td:before {
 
 table[data-responsive-table].responsive tbody tr {
   box-sizing: border-box;
-  height: calc( var(--table-row-height) / var(--table-column-count));
+  max-height: var(--table-row-collapsed-height);
   overflow-y: hidden;
+  cursor: pointer;
+  transition: max-height 0.3s ease-in-out;
+}
+
+table[data-responsive-table].responsive tbody tr.is-expanded {
+  /* max-height: 1000px; */
+  max-height: calc((var(--table-row-collapsed-height) * var(--table-column-count)) + 100px);
+}
+
+/* Optional: Add a visual cue for expand/collapse */
+table[data-responsive-table][data-collapsable="true"].responsive tbody tr td:first-child {
+  position: relative;
+  padding-right: 2.5rem;
+  /* Make space for the arrow */
+}
+
+table[data-responsive-table][data-collapsable="true"].responsive tbody tr td:first-child::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  top: 1.2rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.3s;
+}
+
+table[data-responsive-table][data-collapsable="true"].responsive tbody tr.is-expanded td:first-child::after {
+  transform: rotate(-135deg);
 }

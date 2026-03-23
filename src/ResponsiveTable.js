@@ -3,22 +3,24 @@ import liteDomStyles from '@/css/lite-dom-style.css?inline';
 import {
 	addColumnHeaders,
 	toggleResponsiveCSSClass,
-	applyResponsiveStyles
+	applyResponsiveStyles,
+	applyCollapsibility
 } from '@/utils';
 
 export class ResponsiveTable extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		this.isResponsive = false;
 	}
 
 	get breakpoint() {
 		return this.getAttribute('breakpoint') || 768;
 	}
 
-  get collapsable() {
-    return this.hasAttribute('collapsable');
-  }
+	get collapsable() {
+		return this.hasAttribute('collapsable');
+	}
 
 	connectedCallback() {
 		this.shadowRoot.innerHTML = /* HTML */ `
@@ -46,16 +48,26 @@ export class ResponsiveTable extends HTMLElement {
 					contentRect: { width }
 				} = entry;
 				if (width < this.breakpoint) {
-					toggleResponsiveCSSClass('add', slot);
+					if (!this.isResponsive) {
+						toggleResponsiveCSSClass('add', slot);
+						this.isResponsive = true;
+						if (this.collapsable) {
+							const tables = slot
+								.assignedElements({ flatten: true })
+								.filter((node) => node.tagName === 'TABLE');
+							tables.forEach((table) => applyCollapsibility(table));
+						}
+					}
 				} else {
-					toggleResponsiveCSSClass('remove', slot);
+					if (this.isResponsive) {
+						toggleResponsiveCSSClass('remove', slot);
+						this.isResponsive = false;
+					}
 				}
 			}
 		});
 
 		resizeObserver.observe(container);
-
-    console.log(this.collapsable)
 
 	}
 }
