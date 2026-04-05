@@ -15,9 +15,10 @@
       <header>
         <h1>Responsive Table</h1>
         <p>
-          A tiny web component (custom element) that renders an animated
-          sunrise with horizon and reflection. Colors and width are fully
-          customizable.
+          A lightweight web component that turns regular HTML tables into a
+          mobile-friendly stacked layout. It keeps the original table markup,
+          adds row labels on small viewports, and can optionally collapse rows
+          for denser responsive views.
         </p>
       </header>
 
@@ -114,34 +115,70 @@
 
       <section aria-labelledby="usage-title">
         <h2 id="usage-title">Usage</h2>
+        <p>
+          Wrap any semantic <code>&lt;table&gt;</code> in
+          <code>&lt;responsive-table&gt;</code>. The component switches to the
+          stacked responsive layout once its own width drops below the provided
+          breakpoint.
+        </p>
         <pre class="codeblock"><code>npm install responsive-table</code></pre>
         <pre class="codeblock"><code>import 'responsive-table';
 // Now you can use &lt;responsive-table&gt; in HTML</code></pre>
         <pre class="codeblock"><code>&lt;responsive-table
-  breakpoint="400"
+  breakpoint="800"
   collapsible
-&gt;&lt;/responsive-table&gt;</code></pre>
+&gt;
+  &lt;table&gt;
+    ...
+  &lt;/table&gt;
+&lt;/responsive-table&gt;</code></pre>
       </section>
 
       <section aria-labelledby="props-title">
         <h2 id="props-title">Attributes</h2>
+        <p>
+          The component intentionally keeps the API small. The wrapped table
+          remains standard HTML, so most customization happens in your table
+          markup and surrounding CSS.
+        </p>
         <table id="props-description">
           <thead>
             <tr>
-              <th>Property</th>
+              <th>Attribute</th>
               <th>Description</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>Prop</code>:</td>
-              <td>Prop description, e.g., <code>400px</code></td>
+              <td><code>breakpoint</code></td>
+              <td>
+                Width threshold in pixels at which the component switches to
+                the stacked responsive layout. Defaults to <code>768</code>.
+              </td>
+            </tr>
+            <tr>
+              <td><code>collapsible</code></td>
+              <td>
+                Optional boolean attribute. When present, each responsive row
+                can be expanded or collapsed with a dedicated toggle button.
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
+
+      <section aria-labelledby="notes-title">
+        <h2 id="notes-title">Notes</h2>
+        <p>
+          The idea for the stacked mobile table layout is inspired by the CSS-
+          Tricks article
+          <a href="https://css-tricks.com/responsive-data-tables/">Responsive Data Tables</a>
+          by Chris Coyier. This component packages that idea as a reusable web
+          component with optional collapsible row behavior.
+        </p>
+      </section>
     </main>
-  </div>
+  </div>
 </body>
 
 </html>
