@@ -20,7 +20,8 @@
 		"dev": "vite",
 		"build:lib": "vite build -m lib",
 		"build:site": "vite build -m site",
-		"build": "vite build",
+		"build": "npm run build:lib",
+		"build:all": "npm run build:lib && npm run build:site",
 		"preview": "vite preview",
 		"prepublishOnly": "npm run build:lib"
 	},

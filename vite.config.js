@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
 			: {
 					outDir: 'docs',
 					minify: 'esbuild',
-					emptyOutDir: false
+					emptyOutDir: true
 			  }
 	};
 });

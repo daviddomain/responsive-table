@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Responsive Table – Docs & Demo</title>
+  <script type="module" crossorigin src="./assets/index-DPVwbDAt.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <main>
+      <header>
+        <h1>Responsive Table</h1>
+        <p>
+          A tiny web component (custom element) that renders an animated
+          sunrise with horizon and reflection. Colors and width are fully
+          customizable.
+        </p>
+      </header>
+
+      <section aria-labelledby="demo-title">
+        <h2 id="demo-title">Demo</h2>
+        <responsive-table breakpoint="800" collapsible>
+          <table data-responsive-table="true">
+            <caption>Top Programming Languages — Quick Overview</caption>
+            <thead>
+              <tr>
+                <th scope="col">Language</th>
+                <th scope="col">First Released</th>
+                <th scope="col">Creator/Team</th>
+                <th scope="col">Typing</th>
+                <th scope="col">Common Uses</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Python</td>
+                <td>1991</td>
+                <td>Guido van Rossum</td>
+                <td>Dynamic</td>
+                <td>General-purpose, data science, automation</td>
+              </tr>
+              <tr>
+                <td>JavaScript</td>
+                <td>1995</td>
+                <td>Brendan Eich</td>
+                <td>Dynamic</td>
+                <td>Web front-end/back-end, tooling</td>
+              </tr>
+              <tr>
+                <td>Java</td>
+                <td>1995</td>
+                <td>James Gosling &amp; Sun</td>
+                <td>Static</td>
+                <td>Enterprise, Android, server</td>
+              </tr>
+              <tr>
+                <td>C#</td>
+                <td>2000</td>
+                <td>Microsoft (Anders Hejlsberg)</td>
+                <td>Static</td>
+                <td>.NET apps, games (Unity), back end</td>
+              </tr>
+              <tr>
+                <td>C++</td>
+                <td>1985</td>
+                <td>Bjarne Stroustrup</td>
+                <td>Static</td>
+                <td>Systems, high performance, games</td>
+              </tr>
+              <tr>
+                <td>Go</td>
+                <td>2009</td>
+                <td>Griesemer, Pike, Thompson</td>
+                <td>Static</td>
+                <td>Cloud services, DevOps, CLIs</td>
+              </tr>
+              <tr>
+                <td>Rust</td>
+                <td>2010</td>
+                <td>Graydon Hoare (Mozilla)</td>
+                <td>Static</td>
+                <td>Systems, safety, performance</td>
+              </tr>
+              <tr>
+                <td>TypeScript</td>
+                <td>2012</td>
+                <td>Microsoft (Anders Hejlsberg)</td>
+                <td>Static</td>
+                <td>Large web apps, tooling</td>
+              </tr>
+              <tr>
+                <td>Kotlin</td>
+                <td>2011</td>
+                <td>JetBrains</td>
+                <td>Static</td>
+                <td>Android, JVM back end</td>
+              </tr>
+              <tr>
+                <td>PHP</td>
+                <td>1995</td>
+                <td>Rasmus Lerdorf</td>
+                <td>Dynamic</td>
+                <td>Web back end, CMS, APIs</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </responsive-table>
+      </section>
+
+      <section aria-labelledby="usage-title">
+        <h2 id="usage-title">Usage</h2>
+        <pre class="codeblock"><code>npm install responsive-table</code></pre>
+        <pre class="codeblock"><code>import 'responsive-table';
+// Now you can use &lt;responsive-table&gt; in HTML</code></pre>
+        <pre class="codeblock"><code>&lt;responsive-table
+  breakpoint="400"
+  collapsible
+&gt;&lt;/responsive-table&gt;</code></pre>
+      </section>
+
+      <section aria-labelledby="props-title">
+        <h2 id="props-title">Attributes</h2>
+        <table id="props-description">
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Prop</code>:</td>
+              <td>Prop description, e.g., <code>400px</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
