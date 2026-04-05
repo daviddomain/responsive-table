@@ -68,6 +68,7 @@ const ensureToggleButton = (row) => {
 	if (!row.id) {
 		collapsibleRowId += 1;
 		row.id = `responsive-table-row-${collapsibleRowId}`;
+		row.dataset.collapsibleGeneratedId = 'true';
 	}
 
 	let button = firstCell.querySelector('[data-collapsible-toggle]');
@@ -86,6 +87,18 @@ const ensureToggleButton = (row) => {
 
 	updateToggleButtonState(row, button);
 	return button;
+};
+
+const removeToggleButton = (row) => {
+	const button = row.querySelector('[data-collapsible-toggle]');
+	button?.remove();
+};
+
+const removeGeneratedRowId = (row) => {
+	if (row.dataset.collapsibleGeneratedId === 'true') {
+		row.removeAttribute('id');
+		row.removeAttribute('data-collapsible-generated-id');
+	}
 };
 
 const measureRowHeights = (row) => {
@@ -216,6 +229,11 @@ function cleanupCollapsibility(table) {
 		table._responsiveTableMutationObserver.disconnect();
 		table._responsiveTableMutationObserver = null;
 	}
+
+	getTableRows(table).forEach((row) => {
+		removeToggleButton(row);
+		removeGeneratedRowId(row);
+	});
 }
 
 async function applyResponsiveStyles(addColumnHeaders, liteDomStyles, slot) {

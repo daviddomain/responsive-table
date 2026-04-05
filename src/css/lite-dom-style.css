@@ -64,9 +64,9 @@ table[data-responsive-table][data-collapsible="true"].responsive tbody tr.is-exp
   max-height: var(--row-expanded-height);
 }
 
-table[data-responsive-table][data-collapsible="true"].responsive tbody tr td:first-child {
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr :is(td, th):first-child {
   position: relative;
-  padding-right: 2.5rem;
+  padding-right: 3rem;
 }
 
 table[data-responsive-table] .responsive-table__toggle {
@@ -78,28 +78,35 @@ table[data-responsive-table][data-collapsible="true"].responsive tbody tr .respo
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  right: 1rem;
-  top: 1.2rem;
-  width: 0.5rem;
-  height: 0.5rem;
+  right: 0.25rem;
+  top: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
   border: 0;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
   border-radius: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
   appearance: none;
+  transform: translateY(-50%);
+}
+
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr .responsive-table__toggle::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
   transform: rotate(45deg);
   transition: transform 0.3s;
 }
 
 table[data-responsive-table][data-collapsible="true"].responsive tbody tr .responsive-table__toggle:focus-visible {
   outline: 2px solid currentColor;
-  outline-offset: 4px;
+  outline-offset: 2px;
 }
 
-table[data-responsive-table][data-collapsible="true"].responsive tbody tr.is-expanded .responsive-table__toggle {
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr.is-expanded .responsive-table__toggle::before {
   transform: rotate(-135deg);
 }
