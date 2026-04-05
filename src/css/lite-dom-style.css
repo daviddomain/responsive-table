@@ -52,39 +52,54 @@ table[data-responsive-table].responsive td:before {
   width: auto;
 }
 
-table[data-responsive-table].responsive tbody tr {
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr {
   box-sizing: border-box;
-  max-height: var(--table-row-collapsed-height);
-  overflow-y: hidden;
-  cursor: pointer;
+  max-height: var(--row-collapsed-height);
+  overflow: hidden;
+  position: relative;
   transition: max-height 0.3s ease-in-out;
 }
 
-table[data-responsive-table].responsive tbody tr.is-expanded {
-  /* max-height: 1000px; */
-  max-height: calc((var(--table-row-collapsed-height) * var(--table-column-count)) + 100px);
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr.is-expanded {
+  max-height: var(--row-expanded-height);
 }
 
-/* Optional: Add a visual cue for expand/collapse */
-table[data-responsive-table][data-collapsable="true"].responsive tbody tr td:first-child {
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr td:first-child {
   position: relative;
   padding-right: 2.5rem;
-  /* Make space for the arrow */
 }
 
-table[data-responsive-table][data-collapsable="true"].responsive tbody tr td:first-child::after {
-  content: '';
+table[data-responsive-table] .responsive-table__toggle {
+  display: none;
+}
+
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr .responsive-table__toggle {
   position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   right: 1rem;
   top: 1.2rem;
   width: 0.5rem;
   height: 0.5rem;
+  padding: 0;
+  border: 0;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
   transform: rotate(45deg);
   transition: transform 0.3s;
 }
 
-table[data-responsive-table][data-collapsable="true"].responsive tbody tr.is-expanded td:first-child::after {
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr .responsive-table__toggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+table[data-responsive-table][data-collapsible="true"].responsive tbody tr.is-expanded .responsive-table__toggle {
   transform: rotate(-135deg);
 }

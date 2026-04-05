@@ -1,9 +1,3 @@
-:host {
-	--table-column-count: 0;
-	--table-row-height: 0;
-	--table-row-collapsed-height: 0;
-}
-
 ::slotted(table[data-responsive-table].responsive) {
 	display: block;
 	width: 100%;

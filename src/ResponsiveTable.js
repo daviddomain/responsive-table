@@ -2,9 +2,12 @@ import slottedStyles from '@/css/slotted-style.css?inline';
 import liteDomStyles from '@/css/lite-dom-style.css?inline';
 import {
 	addColumnHeaders,
+	cleanupCollapsibility,
+	nextPaint,
 	toggleResponsiveCSSClass,
 	applyResponsiveStyles,
-	applyCollapsibility
+	applyCollapsibility,
+	resetCollapsibility
 } from '@/utils';
 
 export class ResponsiveTable extends HTMLElement {
@@ -18,8 +21,8 @@ export class ResponsiveTable extends HTMLElement {
 		return this.getAttribute('breakpoint') || 768;
 	}
 
-	get collapsable() {
-		return this.hasAttribute('collapsable');
+	get collapsible() {
+		return this.hasAttribute('collapsible');
 	}
 
 	connectedCallback() {
@@ -36,13 +39,14 @@ export class ResponsiveTable extends HTMLElement {
 			'#responsive-table-container'
 		);
 		const slot = this.shadowRoot.querySelector('slot');
+		this.slotElement = slot;
 
 		slot.addEventListener(
 			'slotchange',
 			applyResponsiveStyles.bind(this, addColumnHeaders, liteDomStyles, slot)
 		);
 
-		const resizeObserver = new ResizeObserver((entries) => {
+		this.resizeObserver = new ResizeObserver(async (entries) => {
 			for (const entry of entries) {
 				const {
 					contentRect: { width }
@@ -51,15 +55,23 @@ export class ResponsiveTable extends HTMLElement {
 					if (!this.isResponsive) {
 						toggleResponsiveCSSClass('add', slot);
 						this.isResponsive = true;
-						if (this.collapsable) {
-							const tables = slot
-								.assignedElements({ flatten: true })
-								.filter((node) => node.tagName === 'TABLE');
-							tables.forEach((table) => applyCollapsibility(table));
-						}
+						await nextPaint();
+					}
+
+					if (this.collapsible) {
+						const tables = slot
+							.assignedElements({ flatten: true })
+							.filter((node) => node.tagName === 'TABLE');
+						tables.forEach((table) => applyCollapsibility(table));
 					}
 				} else {
 					if (this.isResponsive) {
+						const tables = slot
+							.assignedElements({ flatten: true })
+							.filter((node) => node.tagName === 'TABLE');
+						if (this.collapsible) {
+							tables.forEach((table) => resetCollapsibility(table));
+						}
 						toggleResponsiveCSSClass('remove', slot);
 						this.isResponsive = false;
 					}
@@ -67,8 +79,17 @@ export class ResponsiveTable extends HTMLElement {
 			}
 		});
 
-		resizeObserver.observe(container);
+		this.resizeObserver.observe(container);
+	}
 
+	disconnectedCallback() {
+		this.resizeObserver?.disconnect();
+
+		const tables =
+			this.slotElement
+				?.assignedElements({ flatten: true })
+				.filter((node) => node.tagName === 'TABLE') ?? [];
+		tables.forEach((table) => cleanupCollapsibility(table));
 	}
 }
 
