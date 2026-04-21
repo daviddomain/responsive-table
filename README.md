@@ -4,9 +4,7 @@ A lightweight web component that makes regular HTML tables easier to use on smal
 
 It keeps your original table markup, switches to a stacked responsive layout below a configurable breakpoint, and can optionally add collapsible rows for denser mobile views.
 
-![Responsive Table Demo](./docs/responsive-table-demo.gif)
-
-> Placeholder: replace `./docs/responsive-table-demo.gif` with an actual demo GIF once available.
+![Responsive Table Demo](./docs/responsive-table-demo.webp)
 
 ## Installation
 
@@ -21,37 +19,41 @@ import 'responsive-table';
 ```
 
 ```html
-<responsive-table breakpoint="800" collapsible>
-  <table>
-    <caption>Top Programming Languages - Quick Overview</caption>
-    <thead>
-      <tr>
-        <th scope="col">Language</th>
-        <th scope="col">First Released</th>
-        <th scope="col">Creator/Team</th>
-        <th scope="col">Typing</th>
-        <th scope="col">Common Uses</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Python</td>
-        <td>1991</td>
-        <td>Guido van Rossum</td>
-        <td>Dynamic</td>
-        <td>General-purpose, data science, automation</td>
-      </tr>
-    </tbody>
-  </table>
+<responsive-table
+	breakpoint="800"
+	collapsible>
+	<table>
+		<caption>
+			Top Programming Languages - Quick Overview
+		</caption>
+		<thead>
+			<tr>
+				<th scope="col">Language</th>
+				<th scope="col">First Released</th>
+				<th scope="col">Creator/Team</th>
+				<th scope="col">Typing</th>
+				<th scope="col">Common Uses</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Python</td>
+				<td>1991</td>
+				<td>Guido van Rossum</td>
+				<td>Dynamic</td>
+				<td>General-purpose, data science, automation</td>
+			</tr>
+		</tbody>
+	</table>
 </responsive-table>
 ```
 
 ## Attributes
 
-| Attribute | Type | Default | Description |
-| --- | --- | --- | --- |
-| `breakpoint` | `number` | `768` | Width in pixels at which the component switches to the stacked responsive layout. |
-| `collapsible` | `boolean` | `false` | Enables per-row expand/collapse controls in responsive mode. |
+| Attribute     | Type      | Default | Description                                                                       |
+| ------------- | --------- | ------- | --------------------------------------------------------------------------------- |
+| `breakpoint`  | `number`  | `768`   | Width in pixels at which the component switches to the stacked responsive layout. |
+| `collapsible` | `boolean` | `false` | Enables per-row expand/collapse controls in responsive mode.                      |
 
 ## How It Works
 
