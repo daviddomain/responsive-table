@@ -13,9 +13,14 @@ html {
 	box-sizing: inherit;
 }
 
+a {
+	color: white;
+}
+
 body {
 	display: block;
-	font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+	font-family:
+		system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
 		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 	place-items: center;
 	background-color: var(--backgroundColor);
@@ -103,7 +108,7 @@ pre.codeblock {
 	margin: 0 0 1rem;
 }
 
-pre.codeblock>code {
+pre.codeblock > code {
 	display: block;
 	max-width: 100%;
 }
