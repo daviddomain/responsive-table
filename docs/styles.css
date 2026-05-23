@@ -51,22 +51,6 @@ section {
 	padding: 1rem 0;
 }
 
-.demo-resize-hint {
-	margin-bottom: 0.75rem;
-	font-size: 0.95rem;
-}
-
-.demo-resize-wrapper {
-	width: 100%;
-	min-width: 320px;
-	max-width: 100%;
-	resize: horizontal;
-	overflow: auto;
-	border: 1px dashed rgba(231, 236, 239, 0.4);
-	padding: 0.5rem;
-	margin: 0 auto;
-}
-
 h1 {
 	margin: 0 0 1rem;
 }
