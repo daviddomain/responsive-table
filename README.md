@@ -4,7 +4,7 @@ A lightweight web component that makes regular HTML tables easier to use on smal
 
 It keeps your original table markup, switches to a stacked responsive layout below a configurable breakpoint, and can optionally add collapsible rows for denser mobile views.
 
-![Responsive Table Demo](./docs/responsive-table-demo.webp)
+[Responsive Table Demo](https://daviddomain.github.io/responsive-table/)
 
 ## Installation
 
